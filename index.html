@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Talaria Dynamics. The Manta Wing: vertical takeoff, 150 mph, a person or 150 lb of cargo.">
 <title>Talaria Dynamics</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-40%20-337%20994%20994%22%3E%3Crect%20x%3D%22-40%22%20y%3D%22-337%22%20width%3D%22994%22%20height%3D%22994%22%20rx%3D%22180%22%20fill%3D%22%23060607%22/%3E%3Cpath%20fill%3D%22%23fff%22%20fill-rule%3D%22evenodd%22%20d%3D%22M460%20314L461%20312L470%20287L479%20261L483%20250L487%20238L510%20214L532%20189L538%20183L544%20177L551%20177L557%20177L599%20174L641%20171L670%20155L698%20139L719%20127L739%20116L779%2094L818%2073L850%2056L881%2039L895%2032L910%2024L910%2024L910%2023L895%2021L880%2018L832%2012L784%205L783%205L783%205L803%2010L823%2016L848%2022L873%2029L873%2029L873%2029L828%2047L783%2064L750%2077L717%2090L710%2093L702%2095L660%20112L618%20129L581%20128L544%20128L519%20154L494%20180L459%20180L424%20180L398%20154L372%20128L335%20128L297%20129L273%20119L248%20109L209%2094L169%2079L134%2065L99%2052L71%2041L43%2030L42%2030L40%2029L44%2028L47%2027L84%2017L121%208L127%206L132%205L130%205L129%205L81%2011L33%2018L18%2021L4%2023L4%2024L4%2024L13%2029L22%2034L50%2049L78%2064L126%2091L174%20117L218%20141L261%20165L267%20168L273%20171L318%20174L362%20177L367%20177L372%20177L398%20204L424%20232L427%20235L430%20239L444%20276L457%20313L458%20315L459%20317L460%20314ZM460%20223L459%20225L454%20207L450%20188L458%20188L466%20187L467%20188L468%20188L464%20205L460%20221L460%20223Z%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,6 +36,10 @@ a{color:var(--bright)}
 header{position:absolute;top:0;left:0;right:0;z-index:5}
 header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
 .mark{font-family:var(--display);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.42em;color:var(--bright)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--bright)}
+.logo{height:20px;width:auto;display:block;color:var(--bright)}
+.logo.sm{height:10px;color:var(--dim)}
+.brand-foot{display:flex;align-items:center;gap:10px}
 .status{display:flex;align-items:center;gap:10px}
 .lamp{width:6px;height:6px;border-radius:50%;background:var(--lamp);box-shadow:0 0 10px var(--lamp);animation:blink 2.4s ease-in-out infinite}
 @keyframes blink{50%{opacity:.35}}
@@ -159,7 +164,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .bar i+i{background:var(--bright)}
 .bar-l{display:flex;justify-content:space-between;font-size:10px}
 @media (max-width:860px){.legs{grid-template-columns:1fr}.legs li,.legs li+li{padding:12px 0;border-left:0;border-bottom:1px solid var(--rule)}.profile{padding:16px}}
-@media (max-width:480px){.mark{letter-spacing:.24em;font-size:11px}.status{font-size:9.5px;letter-spacing:.1em}}
+@media (max-width:480px){.logo{height:16px}.brand{gap:9px}.mark{letter-spacing:.2em;font-size:10.5px}.status{font-size:9.5px;letter-spacing:.1em}}
 @media (prefers-reduced-motion:reduce){.lamp{animation:none}}
 </style>
 </head>
@@ -167,7 +172,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 
 <header>
   <div class="wrap">
-    <span class="mark">TALARIA DYNAMICS</span>
+    <a class="brand" href="#" aria-label="Talaria Dynamics"><svg class="logo" viewBox="0 0 914 321" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M460 314L461 312L470 287L479 261L483 250L487 238L510 214L532 189L538 183L544 177L551 177L557 177L599 174L641 171L670 155L698 139L719 127L739 116L779 94L818 73L850 56L881 39L895 32L910 24L910 24L910 23L895 21L880 18L832 12L784 5L783 5L783 5L803 10L823 16L848 22L873 29L873 29L873 29L828 47L783 64L750 77L717 90L710 93L702 95L660 112L618 129L581 128L544 128L519 154L494 180L459 180L424 180L398 154L372 128L335 128L297 129L273 119L248 109L209 94L169 79L134 65L99 52L71 41L43 30L42 30L40 29L44 28L47 27L84 17L121 8L127 6L132 5L130 5L129 5L81 11L33 18L18 21L4 23L4 24L4 24L13 29L22 34L50 49L78 64L126 91L174 117L218 141L261 165L267 168L273 171L318 174L362 177L367 177L372 177L398 204L424 232L427 235L430 239L444 276L457 313L458 315L459 317L460 314ZM460 223L459 225L454 207L450 188L458 188L466 187L467 188L468 188L464 205L460 221L460 223Z"/></svg><span class="mark">TALARIA DYNAMICS</span></a>
     <span class="status mono"><i class="lamp" aria-hidden="true"></i>Phase 1 · Simulation</span>
   </div>
 </header>
@@ -321,7 +326,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 
 <footer>
   <div class="wrap">
-    <span class="mono">© 2026 Talaria Dynamics</span>
+    <span class="brand-foot"><svg class="logo sm" viewBox="0 0 914 321" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M460 314L461 312L470 287L479 261L483 250L487 238L510 214L532 189L538 183L544 177L551 177L557 177L599 174L641 171L670 155L698 139L719 127L739 116L779 94L818 73L850 56L881 39L895 32L910 24L910 24L910 23L895 21L880 18L832 12L784 5L783 5L783 5L803 10L823 16L848 22L873 29L873 29L873 29L828 47L783 64L750 77L717 90L710 93L702 95L660 112L618 129L581 128L544 128L519 154L494 180L459 180L424 180L398 154L372 128L335 128L297 129L273 119L248 109L209 94L169 79L134 65L99 52L71 41L43 30L42 30L40 29L44 28L47 27L84 17L121 8L127 6L132 5L130 5L129 5L81 11L33 18L18 21L4 23L4 24L4 24L13 29L22 34L50 49L78 64L126 91L174 117L218 141L261 165L267 168L273 171L318 174L362 177L367 177L372 177L398 204L424 232L427 235L430 239L444 276L457 313L458 315L459 317L460 314ZM460 223L459 225L454 207L450 188L458 188L466 187L467 188L468 188L464 205L460 221L460 223Z"/></svg><span class="mono">© 2026 Talaria Dynamics</span></span>
     <span class="mono">Defense and research inquiries by referral</span>
   </div>
 </footer>
