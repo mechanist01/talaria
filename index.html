@@ -9,175 +9,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* Single dark world: graphite on black, no accent hue. One status lamp only.
-   Layout: full-bleed model stage, then a 12-col ledger of short numbered sections. */
-:root{
-  --void:#060607;
-  --plate:#0d0e10;
-  --rule:#1d1f23;
-  --dim:#6b6f76;
-  --text:#b7bac0;
-  --bright:#eceef1;
-  --lamp:#c9a24a;
-  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  color-scheme:dark;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--void);color:var(--text)}
-body{font-family:var(--display);font-stretch:100%;font-weight:350;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-a{color:var(--bright)}
-:focus-visible{outline:1px solid var(--bright);outline-offset:3px}
-.mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
-
-/* top bar */
-header{position:absolute;top:0;left:0;right:0;z-index:5}
-header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
-.mark{font-family:var(--display);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.42em;color:var(--bright)}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--bright)}
-.logo{height:20px;width:auto;display:block;color:var(--bright)}
-.logo.sm{height:10px;color:var(--dim)}
-.brand-foot{display:flex;align-items:center;gap:10px}
-.status{display:flex;align-items:center;gap:10px}
-.lamp{width:6px;height:6px;border-radius:50%;background:var(--lamp);box-shadow:0 0 10px var(--lamp);animation:blink 2.4s ease-in-out infinite}
-@keyframes blink{50%{opacity:.35}}
-
-/* stage */
-.stage{position:relative;height:min(78vh,760px);min-height:520px;border-bottom:1px solid var(--rule);overflow:hidden;
-  background:radial-gradient(120% 80% at 50% 45%,#121317 0%,var(--void) 62%)}
-#gl{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
-#gl:active{cursor:grabbing}
-.grid{position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);
-  background-size:80px 80px;opacity:.35;mask-image:radial-gradient(70% 60% at 50% 50%,#000 20%,transparent 75%)}
-.hero-copy{position:absolute;left:0;right:0;bottom:0;pointer-events:none}
-.hero-copy .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:32px;flex-wrap:wrap}
-h1{font-stretch:125%;font-weight:800;font-size:clamp(40px,8.5vw,112px);line-height:.88;letter-spacing:-.01em;color:var(--bright)}
-.tag{max-width:30ch;color:var(--text);font-size:15px;text-wrap:balance}
-.controls{pointer-events:auto;display:flex;gap:6px;flex-wrap:wrap}
-.controls button{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  background:transparent;color:var(--dim);border:1px solid var(--rule);padding:8px 12px;cursor:pointer}
-.controls button:hover{color:var(--text);border-color:#33363c}
-.controls button[aria-pressed="true"]{color:var(--bright);border-color:var(--bright)}
-.hud{position:absolute;top:84px;right:clamp(16px,4vw,40px);text-align:right;pointer-events:none;display:grid;gap:4px}
-.hud b{font-weight:500;color:var(--text)}
-.loading{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-
-/* sections */
-section{border-bottom:1px solid var(--rule)}
-.row{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:88px;padding-bottom:88px}
-.idx{grid-column:span 3;display:grid;gap:10px;align-content:start}
-.idx .n{font-family:var(--mono);font-size:12px;color:var(--bright)}
-.body{grid-column:span 9;display:grid;gap:28px}
-h2{font-stretch:112%;font-weight:600;font-size:clamp(26px,3.4vw,40px);line-height:1.08;color:var(--bright);text-wrap:balance;max-width:24ch}
-p{max-width:62ch}
-
-.roles{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule)}
-.roles div{padding:22px 22px 4px 0;display:grid;gap:8px;border-right:1px solid var(--rule)}
-.roles div+div{padding-left:22px}
-.roles div:last-child{border-right:0}
-.roles h3{font-stretch:125%;font-weight:600;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--bright)}
-.roles p{font-size:14.5px}
-
-.phase{display:grid;grid-template-columns:1.1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.phase>div{background:var(--plate);padding:26px;display:grid;gap:12px;align-content:start}
-.law{display:grid;gap:0}
-.law div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:14.5px}
-.law div:last-child{border-bottom:0}
-.law span{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding-top:3px}
-.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.fig{display:grid;gap:4px}
-.fig b{font-stretch:125%;font-weight:600;font-size:30px;color:var(--bright);font-variant-numeric:tabular-nums;line-height:1}
-
-/* envelope ladder */
-.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule)}
-.step{padding:20px 18px 22px;display:grid;gap:10px;border-right:1px solid var(--rule);position:relative}
-.step:last-child{border-right:0}
-.step .bar{height:3px;background:var(--bright)}
-.step:nth-child(2) .bar{width:72%;opacity:.75}
-.step:nth-child(3) .bar{width:44%;opacity:.5}
-.step:nth-child(4) .bar{width:16%;opacity:.35}
-.step h4{font-stretch:125%;font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--bright)}
-.step p{font-size:14px}
-
-/* roadmap */
-.road{display:grid;border-top:1px solid var(--rule)}
-.road div{display:grid;grid-template-columns:64px 1fr 1.3fr 110px;gap:18px;padding:16px 0;border-bottom:1px solid var(--rule);align-items:baseline;font-size:14.5px}
-.road .p{font-family:var(--mono);font-size:12px;color:var(--dim)}
-.road .v{color:var(--bright)}
-.road .s{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:right}
-.road .on .p,.road .on .s{color:var(--lamp)}
-.road .on{background:linear-gradient(90deg,rgba(201,162,74,.06),transparent 60%)}
-
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:36px clamp(16px,4vw,40px)}
-
-@media (max-width:860px){
-  .idx,.body{grid-column:span 12}
-  .row{padding-top:64px;padding-bottom:64px}
-  .phase{grid-template-columns:1fr}
-  .ladder{grid-template-columns:1fr 1fr}
-  .step:nth-child(2){border-right:0}
-  .step:nth-child(-n+2){border-bottom:1px solid var(--rule)}
-}
-@media (max-width:600px){
-  .roles{grid-template-columns:1fr}
-  .roles div{border-right:0;border-bottom:1px solid var(--rule);padding:18px 0!important}
-  .road div{grid-template-columns:44px 1fr;gap:6px 14px}
-  .road div > :nth-child(3){grid-column:2}
-  .road .s{grid-column:2;text-align:left}
-  .figs{grid-template-columns:1fr 1fr}
-  .hud{display:none}
-  .law div{grid-template-columns:1fr;gap:4px}
-}
-
-.caps-sec .wrap{padding-top:48px;padding-bottom:40px;display:grid;gap:18px}
-.caps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule)}
-.caps div{display:grid;gap:10px;padding:26px 20px 6px 0;border-right:1px solid var(--rule)}
-.caps div+div{padding-left:20px}
-.caps div:last-child{border-right:0}
-.caps b{font-stretch:125%;font-weight:700;font-size:clamp(34px,4.6vw,58px);line-height:1;color:var(--bright);font-variant-numeric:tabular-nums}
-.caps small{font-size:.32em;font-weight:500;letter-spacing:.12em;margin-left:6px;color:var(--dim);text-transform:uppercase}
-.caps-note{font-size:10px}
-.missions{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
-.missions div{padding:20px 22px 20px 0;display:grid;gap:8px;border-bottom:1px solid var(--rule)}
-.missions div:nth-child(odd){border-right:1px solid var(--rule)}
-.missions div:nth-child(even){padding-left:22px}
-.missions h3{font-stretch:125%;font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--bright)}
-.missions p{font-size:14.5px}
-@media (max-width:860px){.caps{grid-template-columns:1fr 1fr}.caps div:nth-child(2){border-right:0}.caps div:nth-child(3){padding-left:0}.caps div:nth-child(-n+2){border-bottom:1px solid var(--rule);padding-bottom:20px}}
-@media (max-width:600px){.missions{grid-template-columns:1fr}.missions div{border-right:0!important;padding-left:0!important}}
-
-.profile{display:grid;gap:24px;border:1px solid var(--rule);background:var(--plate);padding:24px}
-.profile svg{width:100%;height:auto;display:block}
-.legs{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--rule)}
-.legs li{display:grid;gap:6px;padding:16px 14px 0 0;font-size:13.5px;align-content:start}
-.legs li+li{padding-left:14px;border-left:1px solid var(--rule)}
-.legs li{transition:opacity .3s}
-.profile.anim .legs li{opacity:.35}
-.profile.anim .legs li.on{opacity:1}
-.legs b{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright)}
-.split{display:grid;gap:8px}
-.bar{display:flex;height:6px;gap:3px}
-.bar i{display:block;background:#4a4d53}
-.bar i+i{background:var(--bright)}
-.bar-l{display:flex;justify-content:space-between;font-size:10px}
-@media (max-width:860px){.legs{grid-template-columns:1fr}.legs li,.legs li+li{padding:12px 0;border-left:0;border-bottom:1px solid var(--rule)}.profile{padding:16px}}
-@media (max-width:480px){.logo{height:16px}.brand{gap:9px}.mark{letter-spacing:.2em;font-size:10.5px}.status{font-size:9.5px;letter-spacing:.1em}}
-@media (prefers-reduced-motion:reduce){.lamp{animation:none}}
-</style>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <a class="brand" href="#" aria-label="Talaria Dynamics"><svg class="logo" viewBox="0 0 914 321" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M460 314L461 312L470 287L479 261L483 250L487 238L510 214L532 189L538 183L544 177L551 177L557 177L599 174L641 171L670 155L698 139L719 127L739 116L779 94L818 73L850 56L881 39L895 32L910 24L910 24L910 23L895 21L880 18L832 12L784 5L783 5L783 5L803 10L823 16L848 22L873 29L873 29L873 29L828 47L783 64L750 77L717 90L710 93L702 95L660 112L618 129L581 128L544 128L519 154L494 180L459 180L424 180L398 154L372 128L335 128L297 129L273 119L248 109L209 94L169 79L134 65L99 52L71 41L43 30L42 30L40 29L44 28L47 27L84 17L121 8L127 6L132 5L130 5L129 5L81 11L33 18L18 21L4 23L4 24L4 24L13 29L22 34L50 49L78 64L126 91L174 117L218 141L261 165L267 168L273 171L318 174L362 177L367 177L372 177L398 204L424 232L427 235L430 239L444 276L457 313L458 315L459 317L460 314ZM460 223L459 225L454 207L450 188L458 188L466 187L467 188L468 188L464 205L460 221L460 223Z"/></svg><span class="mark">TALARIA DYNAMICS</span></a>
-    <span class="status mono"><i class="lamp" aria-hidden="true"></i>Phase 1 · Simulation</span>
+    <a class="brand" href="index.html" aria-label="Talaria Dynamics"><svg class="logo" viewBox="0 0 914 321" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M460 314L461 312L470 287L479 261L483 250L487 238L510 214L532 189L538 183L544 177L551 177L557 177L599 174L641 171L670 155L698 139L719 127L739 116L779 94L818 73L850 56L881 39L895 32L910 24L910 24L910 23L895 21L880 18L832 12L784 5L783 5L783 5L803 10L823 16L848 22L873 29L873 29L873 29L828 47L783 64L750 77L717 90L710 93L702 95L660 112L618 129L581 128L544 128L519 154L494 180L459 180L424 180L398 154L372 128L335 128L297 129L273 119L248 109L209 94L169 79L134 65L99 52L71 41L43 30L42 30L40 29L44 28L47 27L84 17L121 8L127 6L132 5L130 5L129 5L81 11L33 18L18 21L4 23L4 24L4 24L13 29L22 34L50 49L78 64L126 91L174 117L218 141L261 165L267 168L273 171L318 174L362 177L367 177L372 177L398 204L424 232L427 235L430 239L444 276L457 313L458 315L459 317L460 314ZM460 223L459 225L454 207L450 188L458 188L466 187L467 188L468 188L464 205L460 221L460 223Z"/></svg><span class="mark">TALARIA DYNAMICS</span></a>
+    <div class="top-r"><span class="status mono"><i class="lamp" aria-hidden="true"></i>Phase 1 · Simulation</span><nav class="nav mono" aria-label="Site"><a href="private.html">Private flight</a></nav></div>
   </div>
 </header>
 
-<div class="stage" aria-label="Interactive 3D model of the full-scale Manta Wing">
+<div class="stage" data-start="hover" aria-label="Interactive 3D model of the full-scale Manta Wing">
   <div class="grid"></div>
   <canvas id="gl"></canvas>
   <div class="loading mono" id="loading">Loading airframe</div>
@@ -294,7 +137,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 
 <section>
   <div class="wrap row">
-    <div class="idx"><span class="n">04</span><span class="mono">Missions</span></div>
+    <div class="idx"><span class="n">04</span><span class="mono">Control</span></div>
+    <div class="body">
+      <h2>One wing, three levels of control.</h2>
+      <p>The flight computer decides how much of the flying the person does. A soldier who has never flown can be carried out. A trained pilot can fly it by hand. The protections that matter most never switch off.</p>
+      <div class="modes">
+        <div class="mode"><span class="mono">Mode 1</span><h3>Autonomous</h3><p>Set a destination. It takes off, flies there and lands by itself.</p>
+          <div class="who"><div class="seg"><i class="a" style="width:100%"></i></div><div class="lbl mono"><span>Flight computer</span><span>100%</span></div></div></div>
+        <div class="mode"><span class="mono">Mode 2</span><h3>Assisted</h3><p>The person flies. The autopilot takes over past the safety margin or on any failure.</p>
+          <div class="who"><div class="seg"><i class="p" style="width:62%"></i><i class="a" style="width:38%"></i></div><div class="lbl mono"><span>Person</span><span>Flight computer</span></div></div></div>
+        <div class="mode"><span class="mono">Mode 3</span><h3>Expert</h3><p>Full manual control with the flight limits removed. Unlocked after training.</p>
+          <div class="who"><div class="seg"><i class="p" style="width:100%"></i></div><div class="lbl mono"><span>Person</span><span>100%</span></div></div></div>
+      </div>
+      <div class="floor"><span class="mono">Always on</span>Auto-parachute · engine-out recovery · return on fuel reserve, in every mode.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row">
+    <div class="idx"><span class="n">05</span><span class="mono">Missions</span></div>
     <div class="body">
       <h2>One payload, delivered fast, where there is no runway.</h2>
       <div class="missions">
@@ -309,7 +171,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 
 <section>
   <div class="wrap row">
-    <div class="idx"><span class="n">05</span><span class="mono">Status</span></div>
+    <div class="idx"><span class="n">06</span><span class="mono">Status</span></div>
     <div class="body">
       <h2>Subscale demonstrator in simulation.</h2>
       <p>Phase 1 is a 3D-printed electric wing that flies the same control system the turbine aircraft will use. Each phase adds mass and speed, and a person comes last.</p>
@@ -327,7 +189,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 <footer>
   <div class="wrap">
     <span class="brand-foot"><svg class="logo sm" viewBox="0 0 914 321" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M460 314L461 312L470 287L479 261L483 250L487 238L510 214L532 189L538 183L544 177L551 177L557 177L599 174L641 171L670 155L698 139L719 127L739 116L779 94L818 73L850 56L881 39L895 32L910 24L910 24L910 23L895 21L880 18L832 12L784 5L783 5L783 5L803 10L823 16L848 22L873 29L873 29L873 29L828 47L783 64L750 77L717 90L710 93L702 95L660 112L618 129L581 128L544 128L519 154L494 180L459 180L424 180L398 154L372 128L335 128L297 129L273 119L248 109L209 94L169 79L134 65L99 52L71 41L43 30L42 30L40 29L44 28L47 27L84 17L121 8L127 6L132 5L130 5L129 5L81 11L33 18L18 21L4 23L4 24L4 24L13 29L22 34L50 49L78 64L126 91L174 117L218 141L261 165L267 168L273 171L318 174L362 177L367 177L372 177L398 204L424 232L427 235L430 239L444 276L457 313L458 315L459 317L460 314ZM460 223L459 225L454 207L450 188L458 188L466 187L467 188L468 188L464 205L460 221L460 223Z"/></svg><span class="mono">© 2026 Talaria Dynamics</span></span>
-    <span class="mono">Defense and research inquiries by referral</span>
+    <span class="foot-r mono"><a href="private.html">Private flight</a><span>Defense and research inquiries by referral</span></span>
   </div>
 </footer>
 
@@ -337,119 +199,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 }}
 </script>
-<script type="module">
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-
-const canvas = document.getElementById('gl');
-const stage = canvas.parentElement;
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.75;
-
-const scene = new THREE.Scene();
-const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environmentIntensity = 0.15;
-
-const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 50);
-camera.position.set(0, 0.12, 1.9);   // head-on to the upper surface, hover pose
-
-const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(2, 3, -1); scene.add(key);
-const rim = new THREE.DirectionalLight(0xbfc6d0, 2.6); rim.position.set(-2, 0.5, 2.5); scene.add(rim);
-scene.add(new THREE.HemisphereLight(0x30343a, 0x000000, 0.6));
-
-const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true; controls.enablePan = false;
-controls.minDistance = 0.7; controls.maxDistance = 3.8;
-controls.autoRotate = false; controls.autoRotateSpeed = 0.7;
-
-const pivot = new THREE.Group(); scene.add(pivot);
-
-// stealth materials by part group (node names set in the export)
-const M = {
-  skin:    new THREE.MeshStandardMaterial({ color: 0x101113, metalness: 0.1, roughness: 0.38, side: THREE.DoubleSide }),
-  engine:  new THREE.MeshStandardMaterial({ color: 0x2c2e33, metalness: 0.85, roughness: 0.32 }),
-  nozzle:  new THREE.MeshStandardMaterial({ color: 0x1f2024, metalness: 0.9,  roughness: 0.3 }),
-  harness: new THREE.MeshStandardMaterial({ color: 0x1b1c1f, metalness: 0.05, roughness: 0.9 }),
-  metal:   new THREE.MeshStandardMaterial({ color: 0x4a4d53, metalness: 0.9,  roughness: 0.35 }),
-  red:     new THREE.MeshStandardMaterial({ color: 0x5a1414, metalness: 0.2,  roughness: 0.6 }),
-};
-const pilotParts = [];
-import('./final.js').then((m) => {
-  const bin = Uint8Array.from(atob(m.default), (c) => c.charCodeAt(0));
-  new GLTFLoader().parse(bin.buffer, '', onModel, onFail);
-}).catch(onFail);
-function onFail() { document.getElementById('loading').textContent = 'Model unavailable'; }
-function onModel(g) {
-  const root = g.scene;
-  root.traverse((o) => {
-    if (!o.isMesh) return;
-    if (o.geometry.attributes.color) o.geometry.deleteAttribute('color');
-    o.geometry.computeVertexNormals();
-    const k = (o.name || o.parent?.name || 'skin').split('_')[0];
-    o.material = M[k] || M.skin;
-    if (k === 'harness' || k === 'metal' || k === 'red') pilotParts.push(o);
-  });
-  let box = new THREE.Box3().setFromObject(root);
-  const size = box.getSize(new THREE.Vector3());
-  root.scale.setScalar(0.8 / size.x);            // fit the 3 m wing to the stage
-  box = new THREE.Box3().setFromObject(root);
-  root.position.sub(box.getCenter(new THREE.Vector3()));
-  pivot.add(root);
-  document.getElementById('loading').remove();
-}
-
-// view states
-let targetPitch = Math.PI / 2, pitch = Math.PI / 2;   // start in hover
-const hPitch = document.getElementById('h-pitch'), hMode = document.getElementById('h-mode');
-const bC = document.getElementById('b-cruise'), bH = document.getElementById('b-hover');
-const bX = document.getElementById('b-xray'), bS = document.getElementById('b-spin');
-function setMode(hover) {
-  targetPitch = hover ? Math.PI / 2 : 0;
-  bH.setAttribute('aria-pressed', hover); bC.setAttribute('aria-pressed', !hover);
-  hMode.textContent = hover ? 'Hover · tail-sitting' : 'Wing-borne';
-}
-bC.onclick = () => setMode(false);
-bH.onclick = () => setMode(true);
-bX.onclick = () => {
-  const on = bX.getAttribute('aria-pressed') !== 'true';
-  bX.setAttribute('aria-pressed', on);
-  pilotParts.forEach((o) => { o.visible = on; });
-};
-bS.onclick = () => {
-  controls.autoRotate = !controls.autoRotate;
-  bS.setAttribute('aria-pressed', controls.autoRotate);
-};
-if (reduce) bS.setAttribute('aria-pressed', 'false');
-
-function resize() {
-  const w = stage.clientWidth, h = stage.clientHeight;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h;
-  if (w > 900) camera.setViewOffset(w, h, -w * 0.14, h * 0.06, w, h); else camera.clearViewOffset();
-  camera.updateProjectionMatrix();
-}
-new ResizeObserver(resize).observe(stage); resize();
-if (camera.aspect < 1) camera.position.set(0, 0.1, 2.4);   // narrow screens: back off so the span fits
-
-function tick() {
-  pitch += (targetPitch - pitch) * (reduce ? 1 : 0.06);
-  pivot.rotation.x = pitch;
-  pivot.position.y = reduce ? 0 : Math.sin(performance.now() / 1400) * 0.008;
-  hPitch.textContent = Math.round(pitch * 180 / Math.PI) + '°';
-  controls.update();
-  renderer.render(scene, camera);
-  requestAnimationFrame(tick);
-}
-tick();
-
-</script>
+<script type="module" src="viewer.js"></script>
 <script>
 // mission profile animation: out unmanned, hold at LZ, back loaded
 (() => {

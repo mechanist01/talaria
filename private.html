@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Talaria Dynamics private flight program. Fly the Manta Wing jet wing with three levels of flight-computer protection.">
+<title>Private Flight · Talaria Dynamics</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-40%20-337%20994%20994%22%3E%3Crect%20x%3D%22-40%22%20y%3D%22-337%22%20width%3D%22994%22%20height%3D%22994%22%20rx%3D%22180%22%20fill%3D%22%23060607%22/%3E%3Cpath%20fill%3D%22%23fff%22%20fill-rule%3D%22evenodd%22%20d%3D%22M460%20314L461%20312L470%20287L479%20261L483%20250L487%20238L510%20214L532%20189L538%20183L544%20177L551%20177L557%20177L599%20174L641%20171L670%20155L698%20139L719%20127L739%20116L779%2094L818%2073L850%2056L881%2039L895%2032L910%2024L910%2024L910%2023L895%2021L880%2018L832%2012L784%205L783%205L783%205L803%2010L823%2016L848%2022L873%2029L873%2029L873%2029L828%2047L783%2064L750%2077L717%2090L710%2093L702%2095L660%20112L618%20129L581%20128L544%20128L519%20154L494%20180L459%20180L424%20180L398%20154L372%20128L335%20128L297%20129L273%20119L248%20109L209%2094L169%2079L134%2065L99%2052L71%2041L43%2030L42%2030L40%2029L44%2028L47%2027L84%2017L121%208L127%206L132%205L130%205L129%205L81%2011L33%2018L18%2021L4%2023L4%2024L4%2024L13%2029L22%2034L50%2049L78%2064L126%2091L174%20117L218%20141L261%20165L267%20168L273%20171L318%20174L362%20177L367%20177L372%20177L398%20204L424%20232L427%20235L430%20239L444%20276L457%20313L458%20315L459%20317L460%20314ZM460%20223L459%20225L454%20207L450%20188L458%20188L466%20187L467%20188L468%20188L464%20205L460%20221L460%20223Z%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Talaria Dynamics"><svg class="logo" viewBox="0 0 914 321" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M460 314L461 312L470 287L479 261L483 250L487 238L510 214L532 189L538 183L544 177L551 177L557 177L599 174L641 171L670 155L698 139L719 127L739 116L779 94L818 73L850 56L881 39L895 32L910 24L910 24L910 23L895 21L880 18L832 12L784 5L783 5L783 5L803 10L823 16L848 22L873 29L873 29L873 29L828 47L783 64L750 77L717 90L710 93L702 95L660 112L618 129L581 128L544 128L519 154L494 180L459 180L424 180L398 154L372 128L335 128L297 129L273 119L248 109L209 94L169 79L134 65L99 52L71 41L43 30L42 30L40 29L44 28L47 27L84 17L121 8L127 6L132 5L130 5L129 5L81 11L33 18L18 21L4 23L4 24L4 24L13 29L22 34L50 49L78 64L126 91L174 117L218 141L261 165L267 168L273 171L318 174L362 177L367 177L372 177L398 204L424 232L427 235L430 239L444 276L457 313L458 315L459 317L460 314ZM460 223L459 225L454 207L450 188L458 188L466 187L467 188L468 188L464 205L460 221L460 223Z"/></svg><span class="mark">TALARIA DYNAMICS</span></a>
+    <div class="top-r"><span class="status mono"><i class="lamp" aria-hidden="true"></i>Program · In development</span><nav class="nav mono" aria-label="Site"><a href="index.html">Defense</a></nav></div>
+  </div>
+</header>
+
+<div class="stage" data-start="cruise" aria-label="Interactive 3D model of the full-scale Manta Wing">
+  <div class="grid"></div>
+  <canvas id="gl"></canvas>
+  <div class="loading mono" id="loading">Loading airframe</div>
+  <div class="hud mono" aria-hidden="true">
+    <div>Pitch <b id="h-pitch">0°</b></div>
+    <div>Mode <b id="h-mode">Wing-borne</b></div>
+    <div>Turbines <b>6</b></div>
+    <div>Span <b>3.0 m</b></div>
+  </div>
+  <div class="hero-copy">
+    <div class="wrap">
+      <div style="display:grid;gap:18px">
+        <h1>PRIVATE<br>FLIGHT</h1>
+        <p class="tag">Fly a jet wing from the ground up. The flight computer decides how much of it you fly.</p>
+      </div>
+      <div class="controls" role="group" aria-label="Model view">
+        <button type="button" id="b-cruise" aria-pressed="false">Wing-borne</button>
+        <button type="button" id="b-hover" aria-pressed="true">Hover</button>
+        <button type="button" id="b-xray" aria-pressed="true">Pilot module</button>
+        <button type="button" id="b-spin" aria-pressed="false">Rotate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+<section class="caps-sec">
+  <div class="wrap">
+    <div class="caps" role="list">
+      <div role="listitem"><b>VTOL</b><span class="mono">Take off and land on the pad</span></div>
+      <div role="listitem"><b>~150<small>mph</small></b><span class="mono">Wing-borne cruise</span></div>
+      <div role="listitem"><b>3<small>modes</small></b><span class="mono">From passenger to pilot</span></div>
+      <div role="listitem"><b>6<small>turbines</small></b><span class="mono">Recovers from losing one</span></div>
+    </div>
+    <p class="mono caps-note">Full-scale design targets</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row">
+    <div class="idx"><span class="n">01</span><span class="mono">The flight</span></div>
+    <div class="body">
+      <h2>Take off from the ground. Land where you started.</h2>
+      <p>Earlier jet wings launched from helicopters and ended under a parachute. The Manta Wing stands you up on the pad, lifts you vertically, pitches over and flies on the wing. When the flight is over it brings you back and sets you down on the pad.</p>
+      <p>Every flight runs at a Talaria site, with our crew on the ground and the flight computer in the loop.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row">
+    <div class="idx"><span class="n">02</span><span class="mono">Progression</span></div>
+    <div class="body">
+      <h2>Earn your way to full control.</h2>
+      <div class="modes">
+        <div class="mode"><span class="mono">Mode 1</span><h3>Autonomous</h3><p>You ride. The wing flies a set route and lands itself, so your first flight is about the feeling of transition and speed.</p>
+          <div class="who"><div class="seg"><i class="a" style="width:100%"></i></div><div class="lbl mono"><span>Flight computer</span><span>100%</span></div></div></div>
+        <div class="mode"><span class="mono">Mode 2</span><h3>Assisted</h3><p>You take the controls. Push past the safety margin and it eases you back. On any fault it takes over.</p>
+          <div class="who"><div class="seg"><i class="p" style="width:62%"></i><i class="a" style="width:38%"></i></div><div class="lbl mono"><span>You</span><span>Flight computer</span></div></div></div>
+        <div class="mode"><span class="mono">Mode 3</span><h3>Expert</h3><p>Full manual control with the flight limits removed. Unlocked after training sign-off.</p>
+          <div class="who"><div class="seg"><i class="p" style="width:100%"></i></div><div class="lbl mono"><span>You</span><span>100%</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row">
+    <div class="idx"><span class="n">03</span><span class="mono">Always on</span></div>
+    <div class="body">
+      <h2>Some protections never switch off.</h2>
+      <p>Expert mode removes the limits on how you fly. It does not remove the systems that bring you home.</p>
+      <div class="safety">
+        <div><h3>Parachutes</h3><p>A ballistic canopy for the whole wing, and a personal reserve that fires if you separate.</p></div>
+        <div><h3>Engine out</h3><p>Lose a turbine and the other five are re-balanced to recover and land.</p></div>
+        <div><h3>Fuel reserve</h3><p>It turns for the pad while there is still fuel to get there and land.</p></div>
+        <div><h3>One-handle release</h3><p>A single red handle separates you from the wing.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row">
+    <div class="idx"><span class="n">04</span><span class="mono">Access</span></div>
+    <div class="body">
+      <h2>By application.</h2>
+      <p>The private program opens once crewed flight testing is complete. Flights run at Talaria sites with our crew, and training comes before Expert mode. Private ownership follows certification.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand-foot"><svg class="logo sm" viewBox="0 0 914 321" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M460 314L461 312L470 287L479 261L483 250L487 238L510 214L532 189L538 183L544 177L551 177L557 177L599 174L641 171L670 155L698 139L719 127L739 116L779 94L818 73L850 56L881 39L895 32L910 24L910 24L910 23L895 21L880 18L832 12L784 5L783 5L783 5L803 10L823 16L848 22L873 29L873 29L873 29L828 47L783 64L750 77L717 90L710 93L702 95L660 112L618 129L581 128L544 128L519 154L494 180L459 180L424 180L398 154L372 128L335 128L297 129L273 119L248 109L209 94L169 79L134 65L99 52L71 41L43 30L42 30L40 29L44 28L47 27L84 17L121 8L127 6L132 5L130 5L129 5L81 11L33 18L18 21L4 23L4 24L4 24L13 29L22 34L50 49L78 64L126 91L174 117L218 141L261 165L267 168L273 171L318 174L362 177L367 177L372 177L398 204L424 232L427 235L430 239L444 276L457 313L458 315L459 317L460 314ZM460 223L459 225L454 207L450 188L458 188L466 187L467 188L468 188L464 205L460 221L460 223Z"/></svg><span class="mono">© 2026 Talaria Dynamics</span></span>
+    <span class="foot-r mono"><a href="index.html">Defense</a><span>Private flight inquiries by referral</span></span>
+  </div>
+</footer>
+
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module" src="viewer.js"></script>
+
+</body>
+</html>
